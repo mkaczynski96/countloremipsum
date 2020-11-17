@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="http://www.mkaczynski.com/countloremipsum/gen">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:getCountRequest>
+            <gs:numberOfParagraphs>1</gs:numberOfParagraphs>
+            <gs:characterToCount>a</gs:characterToCount>
+        </gs:getCountRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
