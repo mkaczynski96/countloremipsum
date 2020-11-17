@@ -1,4 +1,4 @@
-package com.mkaczynski.countloremipsum;
+package main;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -29,7 +29,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("CountriesPort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://www.mkaczynski.com/countloremipsum/gen");
+        wsdl11Definition.setTargetNamespace("gen");
         wsdl11Definition.setSchema(countloremSchema);
         return wsdl11Definition;
     }
