@@ -10,21 +10,22 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class CountLoremIpsumServiceImpl implements CountLoremIpsum {
 
     private final WebClient webClient;
+    private static final String BASE_URL_1 = "https://loripsum.net/api/";
+    private static final String BASE_URL_2 = "long/plaintext";
+    private static final String CONTENT_TYPE = HttpHeaders.CONTENT_TYPE;
+    private static final String APPLICATION_JSON_VALUE = MediaType.APPLICATION_JSON_VALUE;
 
     public CountLoremIpsumServiceImpl() {
         webClient = WebClient
                 .builder()
-                .baseUrl("https://loripsum.net/api/")
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .baseUrl(BASE_URL_1)
+                .defaultHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .build();
     }
 
     @Override
     public int countLetters(int numberOfParagraphs, String characterToCount) {
-        //    WebClient.UriSpec<WebClient.RequestBodySpec> request = webClient.post();
-
-        final String baseUrl2 = "long/plaintext";
-        StringBuilder ab = new StringBuilder("/" + numberOfParagraphs + "/" + baseUrl2);
+        StringBuilder ab = new StringBuilder("/" + numberOfParagraphs + "/" + BASE_URL_2);
         WebClient.RequestBodySpec uri1 = webClient
                 .method(HttpMethod.GET)
                 .uri(ab.toString());
