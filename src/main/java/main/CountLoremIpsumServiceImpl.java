@@ -6,36 +6,25 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Scanner;
-
 @Service
-public class CountLoremIpsumServiceImpl implements CountLoremIpsum{
+public class CountLoremIpsumServiceImpl implements CountLoremIpsum {
+
+    private final WebClient webClient;
+
     public CountLoremIpsumServiceImpl() {
-        run();
-    }
-
-    private void run() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Hello in Count-LoremIpsum");
-        System.out.println("\nEnter the number of paragraphs to generate: ");
-        int k = scanner.nextInt();
-
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\nEnter char to count: ");
-        char g = sc.next().charAt(0);
-
-
-        WebClient webClient = WebClient
+        webClient = WebClient
                 .builder()
                 .baseUrl("https://loripsum.net/api/")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
+    }
 
-        WebClient.UriSpec<WebClient.RequestBodySpec> request = webClient.post();
+    @Override
+    public int countLetters(int numberOfParagraphs, String characterToCount) {
+        //    WebClient.UriSpec<WebClient.RequestBodySpec> request = webClient.post();
 
         final String baseUrl2 = "long/plaintext";
-        StringBuilder ab = new StringBuilder("/" + k + "/" + baseUrl2);
+        StringBuilder ab = new StringBuilder("/" + numberOfParagraphs + "/" + baseUrl2);
         WebClient.RequestBodySpec uri1 = webClient
                 .method(HttpMethod.GET)
                 .uri(ab.toString());
@@ -45,19 +34,18 @@ public class CountLoremIpsumServiceImpl implements CountLoremIpsum{
                 .bodyToMono(String.class)
                 .block();
 
-        long m = response2.chars()
-                .filter(e -> e == g)
-                .count();
-        System.out.println(m);
-    }
-
-    @Override
-    public int countLetters() {
-        return 0;
+        assert response2 != null;
+        return filterLetters(response2, characterToCount);
     }
 
     @Override
     public int coundWords() {
         return 0;
+    }
+
+    private static int filterLetters(String text, String characterToCount) {
+        return (int) text.chars()
+                .filter(e -> e == characterToCount.charAt(0))
+                .count();
     }
 }
