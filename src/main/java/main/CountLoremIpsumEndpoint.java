@@ -11,7 +11,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 public class CountLoremIpsumEndpoint {
     private static final String NAMESPACE_URI = "gen";
 
-    private final CountLoremIpsumServiceImpl countLoremIpsumService;
+    private final CountLoremIpsum countLoremIpsumService;
 
     public CountLoremIpsumEndpoint(CountLoremIpsumServiceImpl countLoremIpsumService) {
         this.countLoremIpsumService = countLoremIpsumService;
@@ -21,8 +21,11 @@ public class CountLoremIpsumEndpoint {
     @ResponsePayload
     public GetCountResponse getCount(@RequestPayload GetCountRequest request) {
         GetCountResponse response = new GetCountResponse();
-
-        response.setCount(countLoremIpsumService.countLetters(request.getNumberOfParagraphs(), request.getCharacterToCount()));
+        try {
+            response.setCount(countLoremIpsumService.countLetters(request.getNumberOfParagraphs(), request.getCharacterToCount()));
+        } catch (Exception e) {
+            response.setCount(-1);
+        }
 
         return response;
     }
