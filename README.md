@@ -48,3 +48,10 @@ curl --header "content-type: text/xml" -d @./src/test/request.xml http://localho
   </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
 ```
+
+
+<b> HOW TO RUN </b>
+Run project in Intellij IDEA (until I wont create binary) and put this command into terminal (only for UNIX based systems):
+>curl --header "content-type: text/xml" -d @./src/test/request.xml http://localhost:8080/ws  | xmllint --format -
+
+Command should be runned into project directory. Request file is in ./src/test/request.xml path.
