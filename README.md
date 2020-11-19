@@ -4,8 +4,8 @@
 <b>Count Lorem Ipsum API</b>
 
 
-API provides ability to operate on lorem ipsum text. 
-API is called by SOAP requests. It is using an external API from <i>loremipsum.net</i>, which provides plain text of lorem ipsum. 
+SOAP API provides ability to operate on lorem ipsum text. 
+It is using an external API from <i>loremipsum.net</i>, which provides plain text of lorem ipsum. 
 External API is consumed by WebClient.
 
 
