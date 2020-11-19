@@ -50,7 +50,8 @@ curl --header "content-type: text/xml" -d @./src/test/request.xml http://localho
 ```
 
 
-<b> HOW TO RUN </b>
+<b>HOW TO RUN</b>
+
 Run project in Intellij IDEA (until I wont create binary) and put this command into terminal (only for UNIX based systems):
 >curl --header "content-type: text/xml" -d @./src/test/request.xml http://localhost:8080/ws  | xmllint --format -
 
