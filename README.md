@@ -9,7 +9,7 @@ It is using an external API from <i>loremipsum.net</i>, which provides plain tex
 External API is consumed by WebClient.
 
 
-The first method is counting letters in the text. User sends a request with the number of paragraphs to generate, and the letter to count. API responses with a count number.
+The first method is counting letters in the text. User sends a request with the number of text paragraphs to generate, and the letter to count. API responses with a count number.
 
 
 For example: 
