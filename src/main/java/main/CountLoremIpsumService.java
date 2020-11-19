@@ -1,5 +1,5 @@
 package main;
 
-public interface CountLoremIpsum {
+public interface CountLoremIpsumService {
     int countLetters(int numberOfParagraphs, String characterToCount);
 }

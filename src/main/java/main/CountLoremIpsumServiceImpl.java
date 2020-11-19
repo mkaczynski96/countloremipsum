@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
-public class CountLoremIpsumServiceImpl implements CountLoremIpsum {
+public class CountLoremIpsumServiceImpl implements CountLoremIpsumService {
 
     private static final String CONTENT_TYPE = HttpHeaders.CONTENT_TYPE;
     private static final String APPLICATION_JSON_VALUE = MediaType.APPLICATION_JSON_VALUE;
@@ -26,6 +26,10 @@ public class CountLoremIpsumServiceImpl implements CountLoremIpsum {
 
     @Override
     public int countLetters(int numberOfParagraphs, String characterToCount) {
+        if (isInvalid(numberOfParagraphs, characterToCount)) {
+            return -1;
+        }
+
         WebClient.RequestBodySpec uri = webClient
                 .method(HttpMethod.GET)
                 .uri("/" + numberOfParagraphs + BASE_URL_2);
@@ -44,5 +48,10 @@ public class CountLoremIpsumServiceImpl implements CountLoremIpsum {
         return (int) text.chars()
                 .filter(e -> e == characterToCount.charAt(0))
                 .count();
+    }
+
+    // Return invalid response when user request invalid number of paragraphs or null/0 character to count
+    private static boolean isInvalid(int numberOfParagraphs, String characterToCount) {
+        return numberOfParagraphs <= 0 || characterToCount.equals("");
     }
 }
